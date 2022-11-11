@@ -1,0 +1,147 @@
+<h1>Formulario</h1>
+<form (ngSubmit)="registrarUsuario()" #myForm="ngForm">
+  <div class="input-group">
+    <label for="name">Nombre:</label>
+    <input type="text" required [(ngModel)]="objRegistroUsuario.nombre" id="inputNombre" name="nombre">
+    <p>Mensajes de error:</p>
+  </div>
+  <div class="input-group">
+    <label for="email">Correo Electronico:</label>
+    <input type="email" required [(ngModel)]="objRegistroUsuario.correo" id="inputCorreo" name="correo">
+    <p>Mensajes de error:</p>
+  </div>
+  <div class="input-group">
+    <label for="name">Contraseña:</label>
+    <input type="password" required [(ngModel)]="objRegistroUsuario.contrasena" id="inputContraseña" name="contrasena">
+    <p>Mensajes de error:</p>
+  </div>
+  <button [disabled]="myForm.invalid" type="submit" >Registrar</button>
+  <button type="button" >Accion </button>
+</form>
+
+<h1>NgClass y NgStyle</h1>
+<input type="text" #nameInput4="ngModel" required [(ngModel)]="objPersona.nombre" >
+<hr class="line-error" [ngClass]="{
+  'valid': nameInput4.valid,
+  'invalid': nameInput4.invalid
+}">
+<p class="message-error" [class.invalid]="nameInput2.valid">
+  El campo es requerido.
+</p>
+<hr>
+<div>
+  <div>
+    <input type="number" [(ngModel)]="box.width">
+    <input type="number" [(ngModel)]="box.height">
+    <input type="color" [(ngModel)]="box.background">
+  </div>
+  <div [ngStyle]="{
+    'width.px': box.width,
+    'heigth.px': box.height,
+    'background-color': box.background,
+    'display': 'block'
+  }"></div>
+</div>
+
+<h1>Class y style</h1>
+<input type="text" #nameInput2="ngModel" required [(ngModel)]="objPersona.nombre" >
+<section>
+  <p class="message-error" [class.invalid]="nameInput2.valid">
+    El campo es requerido.
+  </p>
+  <label>Nombre</label>
+  <input type="text" #nameInput3="ngModel" required [(ngModel)]="objPersona.nombre" >
+  <p [style.font-style]="nameInput3.invalid ? 'italic': 'normal'">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas consequuntur animi molestias repellat quibusdam commodi sit aliquid quidem, consectetur aut dolorum culpa nemo quisquam sed cum! Maxime nisi officia in.
+  </p>
+  <div class="styles">
+    <div>
+      <input type="text" [(ngModel)]="widthImagen">
+    </div>
+    <div>
+      <img [src]="'https://static.platzi.com/media/avatars/avatars/ReinaldoMendoza_ce1ed42a-c779-43c8-88ed-1c1d00a9a350.jpg'" [style.width.%]="widthImagen">
+    </div>
+  </div>
+</section>
+<hr>
+
+<h1>NGFor Objetos</h1>
+<section class="products-grid">
+  <div *ngFor="let product of products">
+    <img [src]="product.image" [alt]="product.description" >
+    <h2>{{ product.price }}</h2>
+    <p>{{ product.name }}</p>
+    <p>{{ product.description }}</p>
+  </div>
+</section>
+<hr>
+
+<h1>ngSwitch</h1>
+<input type="text" required [(ngModel)]="objPersona.nombre" >
+<div [ngSwitch]="objPersona.nombre">
+  <p *ngSwitchCase="'Jeisson D'">Mi contenido 1...</p>
+  <p *ngSwitchCase="'Jehison D'">Mi contenido 2...</p>
+  <p *ngSwitchDefault>No hizo match con ningun case</p>
+</div>
+
+<hr>
+
+
+<h1>NGFor:</h1>
+<input type="text" required [(ngModel)]="nuevoNombre" >
+<button (click)="agregarNombre()">Agregar Nombre</button>
+<ul>
+  <li *ngIf="nombres.length === 0">No hay mas nombres en la lista...</li>
+  <li *ngFor="let name of nombres; index as i">
+    {{i}} - {{name}}
+    <button (click)="eliminarNombre(i)" >Eliminar</button>
+  </li>
+</ul>
+
+
+<h1>NGIF:</h1>
+<input type="text" required [(ngModel)]="objPersona.nombre" >
+<p *ngIf="objPersona.nombre == 'Jeisson D'">Mi contenido 1...</p>
+<p *ngIf="objPersona.nombre == 'Jehison D' && objPersona.edad >= 18 else elseBloque">Mi contenido 2...</p>
+<ng-template #elseBloque>
+  <p>Bloque de ELSE</p>
+</ng-template>
+
+<hr>
+
+<h1>NGModel:</h1>
+<p>Nombre: {{objPersona.nombre}}</p>
+<input type="text" #nameInput="ngModel" required [(ngModel)]="objPersona.nombre" >
+<p>Valido: {{nameInput.valid}}</p>
+<p>Edad: {{objPersona.edad}}</p>
+<input type="number" max="100" min="18" #ageInput="ngModel" required [(ngModel)]="objPersona.edad" >
+<p>Valido: {{ageInput.valid}}</p>
+<hr>
+
+<h1>Eventos:</h1>
+<button [disabled]="btnDisable">Buscar</button>
+<button (click)="toogleButton()">Toggle Button</button>
+<p>Nombre: {{ objPersona.nombre }}</p>
+<p>Edad: {{ objPersona.edad }}</p>
+<button (click)="aumentarEdad()">Edad++</button>
+<div class="box" (scroll)="verificarScroll($event)">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum voluptas cum amet culpa consequuntur, autem provident iste. Sint, tenetur, delectus ratione fuga necessitatibus esse omnis soluta sed, accusamus illum quos.</p>
+</div>
+<input type="text" [value]="objPersona.nombre" (keyup)="teclaTecleada($event)">
+
+<hr>
+
+<h1>Propiedades:</h1>
+<button [disabled]="btnDisable">Enviar</button>
+<input type="text" [value]="objPersona.nombre">
+<progress max="100" [value]="objPersona.edad"></progress>
+<img [src]="objPersona.avatar">
+
+<hr>
+<h1>Hola Mundo</h1>
+<h2>{{ 'Hola Mundo'.repeat(5) }}</h2>
+<p>5 + 5 = {{ 5 + 5 }}</p>
+<h3>Hola yo me llamo: {{ name }}</h3>
+
+
+<img src={{imagen}} alt="Esto es una imagen de ice bear">

@@ -1,0 +1,330 @@
+<body>
+  <header class="header addBg">
+    <section class="container">
+      <nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+          <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <img src="../assets/images/icono.png" alt="Icono de la pagina" width="140">
+        </div>
+        <div id="main-nav" class="collapse navbar-collapse" style="background: none;">
+          <ul class="nav navbar-nav" id="mainNav">
+            <li class="active">
+              <a href="#home" class="scroll-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
+                  <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z"/>
+                  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                </svg>
+                 Inicio
+              </a>
+            </li>
+            <li class="">
+              <a href="#catalogo" class="scroll-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                </svg>
+                Catalogo
+              </a>
+            </li>
+            <li class="">
+              <a href="#contactUs" class="scroll-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                  <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                </svg>
+                 Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+  </header>
+
+  <div id="#top"></div>
+  <section id="home">
+    <div class="banner-container"> <img src="../assets/images/background2.jpg" alt="banner">
+      <div class="container banner-content">
+        <div class="heroText">
+          <h2><span>BEBOK</span><br>
+            Libreria virtual</h2>
+          <span class="caption" id="spanSlogan">Para el intercambio de libros</span>
+          <br><br><br>
+          <input type="text" (keyup)="buscarLibro($event)" class="form-control" name="libro" id="libro" placeholder="Digita el titulo del libro que buscas..." title="Please enter your name (at least 2 characters)">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Catalogo-->
+  <section id="catalogo" class="page-section section appear clearfix secPad">
+    <div class="container" >
+      <div class="heading">
+        <!-- Heading -->
+        <h2>Catalogo de Libros.</h2>
+        <p>En esta seccion encontrara el catalogo completo de los libros disponibles que se tienen para el intercambio, junto con las condiciones de intercambio, tambien podra sugerir una nueva regla de intercambio para que el vendedor del libro la verifique y la acepte.<br><br></p>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" (click)="crearLibro()">
+          Crear nuevo libro.
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </button><br><br><br>
+
+        <section class="products-grid">
+          <div *ngFor="let product of products" (click)="openPopup(product.productId)">
+            <img [src]="product.image" [alt]="product.description" height="250">
+            <!--h4>{{ product.name }}</!--h4-->
+            <h4 *ngIf="product.name.length < 21 else elseBloque">{{ product.name }}</h4>
+            <ng-template #elseBloque>
+              <h4>{{ product.name.substring(0, 20) + "..."}}</h4>
+            </ng-template>
+            <h5>{{ product.description }}</h5>
+            <p>{{ product.price | currency: 'USD' | lowercase  }}</p>
+          </div>
+        </section>
+        <hr>
+      </div>
+    </div>
+  </section>
+
+  <!--Registro -->
+  <section id="contactUs" class="page-section secPad">
+    <div class="container">
+      <div class="row">
+        <div class="heading">
+          <!-- Heading -->
+          <h2>Login o registrerse</h2>
+          <p>En el siguiente formulario se podra registrar y publicar sus propios libros para intercambio.</p>
+        </div>
+      </div>
+      <div class="row mrgn30">
+        <form method="post" action="https://learning-zone.github.io/website-templates/me-resume-personal-portfolio-responsive-template/" id="contactfrm" role="form">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="name">Usuario</label>
+              <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" title="Please enter your name (at least 2 characters)">
+            </div>
+            <div class="form-group">
+              <label for="email">Contraseña</label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" title="Please enter a valid email address">
+            </div>
+          </div>
+        </form>
+        <button name="submit" type="submit" class="btn btn-lg btn-primary" id="submit">Ingresar</button>
+      </div>
+    </div>
+  </section>
+  <footer class="copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="social pull-left">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <span class="pull-right">Copyright 2014 | All Rights Reserved</span>
+        </div>
+      </div>
+      <!-- / .row -->
+    </div>
+  </footer>
+  <a href="#top" class="topHome">
+    <i class="fa fa-chevron-up fa-2x"></i>
+  </a>
+
+  <script src="../assets/js/modernizr-latest.js"></script>
+  <script src="../assets/js/jquery-1.8.2.min.js" type="text/javascript"></script>
+  <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../assets/js/jquery.isotope.min.js" type="text/javascript"></script>
+  <script src="../assets/js/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <script src="../assets/js/jquery.nav.js"
+
+  type="text/javascript"></script>
+  <script src="../assets/js/jquery.cslider.js" type="text/javascript"></script>
+  <script src="../assets/js/jquery.diagram.js"></script>
+  <script src="../assets/js/custom.js" type="text/javascript"></script>
+  <script src="../assets/js/owl.carousel.js"></script>
+</body>
+
+<!--Modal-->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3 class="modal-title">Detalle del libro: {{ objLibro.name }}</h3>
+      </div>
+      <div class="modal-body">
+        <img src="{{objLibro.image}}" alt="Imagen por defecto" width="400">
+        <h4>Titulo: {{ objLibro.name }}</h4>
+        <h5>Autor(es): {{ objLibro.description }}</h5>
+        <h6>Genero: {{ objLibro.categoryName }}</h6><hr>
+        <h5>Reglas de intercambio:</h5>
+        <p>Por dinero:</p>
+        <div class="alert alert-success" role="alert">
+          {{ objLibro.price | currency: 'USD' | lowercase  }}
+        </div>
+        <p>Por libros: </p>
+        <div class="alert alert-info" role="alert">
+          {{ objLibro.swap }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" (click)="editarLibro()">
+          Editar
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="intercambiarLibro()">
+          Intercambiar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal EDITAR-->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle2}" name="editarModal" id="editarModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3 class="modal-title">EDITAR DETALLE DEL LIBRO: {{ objLibro.name }}</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="guardarInfoLibro()" #myFormEdit="ngForm">
+          <div class="form-group">
+            <label for="labelLibroName">Titulo:</label>
+            <input type="text" required [value]="objLibro.name" (keyup)="actualizarName($event)" class="form-control" id="inputLibroName" name="inputLibroName" aria-describedby="emailHelp" placeholder="Ingrese el titulo del lbro">
+            <p *ngIf="objLibro.name == ''">Campo titulo vacio</p>
+            <!--small id="emailHelp" class="form-text text-muted">Ingrese el nuevo titulo de su libro...</-small--->
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Autores:</label>
+            <input type="text" required [value]="objLibro.description" (keyup)="actualizarDescription($event)" class="form-control" id="inputLibroDescription" name="inputLibroDescription" placeholder="Autor(es) del libro">
+            <p *ngIf="objLibro.description == ''">Campo autor(es) vacio</p>
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Genero:</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Sci-Fi" checked>
+              Sci-Fi
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Drama">
+              Drama
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Terror">
+              Terror
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Novela">
+              Novela
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Imagen:</label>
+            <input type="file" class="form-control" id="inputLibroImagen" placeholder="Nueva imagen del libro">
+          </div><hr>
+          <label for="labelLibroDescription">Reglas de intercambio:</label>
+          <div class="form-group">
+            <label for="labelLibroDescription">Dinero:</label>
+            <input type="number" [value]="objLibro.price" (keyup)="actualizarPrice($event)" class="form-control" id="inputLibroDinero" placeholder="Ingrese el valor del libro">
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Libros:</label>
+            <input type="text" value="{{ objLibro.swap }}" [value]="objLibro.swap" (keyup)="actualizarSwap($event)" class="form-control" id="inputLibroIntercambio" placeholder="Ingrese los libros que quiere a cambio">
+            <small id="emailHelp" class="form-text text-muted">Ingrese los libros que quiere separados por una coma(,)</small>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" [disabled]="myFormEdit.invalid" class="btn btn-primary" (click)="guardarInfoLibro()">
+              Guardar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="closePopupEdit()">
+              Cerrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal CREAR-->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle3}" name="crearModal" id="crearModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3 class="modal-title">DETALLE NUEVO LIBRO:</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="guardarInfoLibro()" #myFormCreate="ngForm">
+          <div class="form-group">
+            <label for="labelLibroName">Titulo:</label>
+            <input type="text" required [value]="objLibro.name" (keyup)="actualizarName($event)" class="form-control" id="inputLibroName" name="inputLibroName" aria-describedby="emailHelp" placeholder="Ingrese el titulo del lbro">
+            <p *ngIf="objLibro.name == ''">Campo titulo vacio</p>
+            <!--small id="emailHelp" class="form-text text-muted">Ingrese el nuevo titulo de su libro...</-small--->
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Autores:</label>
+            <input type="text" required [value]="objLibro.description" (keyup)="actualizarDescription($event)" class="form-control" id="inputLibroDescription" name="inputLibroDescription" placeholder="Autor(es) del libro">
+            <p *ngIf="objLibro.description == ''">Campo autor(es) vacio</p>
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Genero:</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Sci-Fi">
+              Sci-Fi
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Drama">
+              Drama
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Terror">
+              Terror
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Novela">
+              Novela
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Imagen:</label>
+            <input type="file" class="form-control" id="inputLibroImagen" placeholder="Nueva imagen del libro">
+          </div><hr>
+          <label for="labelLibroDescription">Reglas de intercambio:</label>
+          <div class="form-group">
+            <label for="labelLibroDescription">Dinero:</label>
+            <input type="number" (keyup)="actualizarPrice($event)" class="form-control" id="inputLibroDinero" placeholder="Ingrese el valor del libro">
+          </div>
+          <div class="form-group">
+            <label for="labelLibroDescription">Libros:</label>
+            <input type="text" value="{{ objLibro.swap }}" [value]="objLibro.swap" (keyup)="actualizarSwap($event)" class="form-control" id="inputLibroIntercambio" placeholder="Ingrese los libros que quiere a cambio">
+            <small id="emailHelp" class="form-text text-muted">Ingrese los libros que quiere separados por una coma(,)</small>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" [disabled]="myFormEdit.invalid" class="btn btn-primary" (click)="guardarInfoLibro()">
+              Guardar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="closePopupCreated()">
+              Cerrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
