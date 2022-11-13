@@ -1,6 +1,7 @@
 import { ANALYZE_FOR_ENTRY_COMPONENTS, Component, Input} from '@angular/core';
 import { Product } from './product.model';
 import { setTheme } from 'ngx-bootstrap/utils';
+import { RestService } from './rest.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,14 @@ import { setTheme } from 'ngx-bootstrap/utils';
 
 export class AppComponent
 {
+  //ENDPOINT_BACKEND = "http://54.236.237.62/tienda-virtual/api/products";
+  ENDPOINT_BACKEND = "http://localhost:8090/tienda-virtual/api/products";
+
+  constructor(private RestService:RestService)
+  {
+
+  }
+
   displayStyle = "none";
   displayStyle2 = "none";
   displayStyle3 = "none";
@@ -27,11 +36,20 @@ export class AppComponent
     swap: '',
   }
 
+  objLibroInsert = {
+    name: '',
+    description: '',
+    price: 0,
+    categoryId: 1,
+    active: true,
+    image: '../assets/images/default.png',
+  }
 
   widthImagen = 10;
   nombres: string[] = ['A', 'B', 'C', 'D', 'E'];
   nuevoNombre : string = "";
 
+  products: Product[] = [];
 
   title = 'tiendaLibros';
   edad = 18;
@@ -49,6 +67,19 @@ export class AppComponent
     edad: 29,
     nombre: 'Jehison D',
     avatar: 'https://i1.sndcdn.com/avatars-000434742474-znsup5-t500x500.jpg'
+  }
+
+  ngOnInit(): void{
+    this.cargarData();
+  }
+
+  public cargarData()
+  {
+    this.RestService.get(this.ENDPOINT_BACKEND + "/all").subscribe(response => {
+      console.log(response);
+      //alert(response);
+      this.products = response as Product[];
+    })
   }
 
   public closePopupCreated()
@@ -74,14 +105,19 @@ export class AppComponent
 
   public guardarInfoLibro()
   {
-    console.log(this.objLibro);
-    if(this.objLibro.name == "" || this.objLibro.description == "")
+    console.log(this.objLibroInsert);
+
+    if(this.objLibroInsert.name == "" || this.objLibroInsert.description == "")
     {
       alert("Ingrese la información faltante...");
     }
     else
     {
-      alert("Guardando info...");
+      this.RestService.post(this.ENDPOINT_BACKEND + "/save", this.objLibroInsert).subscribe(
+        response => {
+          alert("Guardando info: " + response + " ...");
+        }
+      );
     }
   }
 
@@ -98,21 +134,28 @@ export class AppComponent
   public actualizarName(event: Event)
   {
     const element = event.target as HTMLInputElement;
-    this.objLibro.name = element.value;
+    this.objLibroInsert.name = element.value;
     console.log(element.value);
   }
 
   public actualizarDescription(event: Event)
   {
     const element = event.target as HTMLInputElement;
-    this.objLibro.description = element.value;
+    this.objLibroInsert.description = element.value;
     console.log(element.value);
   }
 
   public actualizarPrice(event: Event)
   {
     const element = event.target as HTMLInputElement;
-    this.objLibro.price = Number(element.value);
+    this.objLibroInsert.price = Number(element.value);
+    console.log(element.value);
+  }
+
+  public actualizarCategory(event: Event)
+  {
+    const element = event.target as HTMLInputElement;
+    this.objLibroInsert.categoryId = Number(element.value);
     console.log(element.value);
   }
 
@@ -238,314 +281,8 @@ export class AppComponent
   };
 
   //LIBROS:
+  /*
   products: Product[] = [
-  {
-		"productId": 16,
-		"name": "Dune.",
-		"description": "Frank Herbert.",
-		"price": 29000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/16.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Sci-fi",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Juego de tronos, La biblia"
-    }
-	},
-  {
-		"productId": 17,
-		"name": "Matar a un ruiseñor.",
-		"description": "Harper Lee.",
-		"price": 17000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/17.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Novela, Historia Real",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-  {
-		"productId": 8,
-		"name": "El guardian entre el centeno.",
-		"description": "J.D. Salinger",
-		"price": 17500,
-		"categoryId": 2,
-		"active": true,
-    "image": "../assets/Books/8.jpeg",
-		"category": {
-			"categoryId": 2,
-			"category": "Novela, Historia Real, Clasico Americano",
-			"active": true
-		}
-    ,
-    "swap": {
-      "money": 29000,
-      "books": "1984"
-    }
-	},
-  {
-		"productId": 5,
-		"name": "Llamame por tu nombre.",
-		"description": "André Aciman.",
-		"price": 11000,
-		"categoryId": 2,
-		"active": true,
-    "image": "../assets/Books/5.jpeg",
-		"category": {
-			"categoryId": 2,
-			"category": "Novela, Drama",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "El principito, Dune, Cronicas marcianas"
-    }
-	},
-	{
-		"productId": 12,
-		"name": "Verano pródigo.",
-		"description": "Barbara Kingsolver",
-		"price": 26000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/12.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Novela larga",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-  {
-		"productId": 9,
-		"name": "La venus de las pieles.",
-		"description": "L. Sacher Masoch.",
-		"price": 22000,
-		"categoryId": 3,
-		"active": true,
-    "image": "../assets/Books/9.jpeg",
-		"category": {
-			"categoryId": 3,
-			"category": "Novela, Literatura erótica",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Lagrimas de angeles"
-    }
-	},
-	{
-		"productId": 13,
-		"name": "Las ventajas de ser invisible.",
-		"description": "Stephen Chbosky.",
-		"price": 35000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/13.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Novela juvenil, novela de aprendizaje",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-  },
-  {
-		"productId": 2,
-		"name": "1984",
-		"description": "George Orwell",
-		"price": 15000,
-		"categoryId": 2,
-		"active": true,
-    "image": "../assets/Books/2.jpeg",
-		"category": {
-			"categoryId": 2,
-			"category": "Sci-fi, Novela distopica",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "El marciano"
-    }
-	},
-  {
-		"productId": 14,
-		"name": "El principito.",
-		"description": "Antoine De Saint-Exepéry",
-		"price": 30000,
-		"categoryId": 2,
-		"active": true,
-    "image": "../assets/Books/14.jpeg",
-		"category": {
-			"categoryId": 2,
-			"category": "Fábula, Fantasía, Literatura infantil",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cosmos, Matar a un ruiseñor"
-    }
-	},
-	{
-		"productId": 6,
-		"name": "Contrato con Dios.",
-		"description": "Juan Gomez-Jurado.",
-		"price": 15000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/6.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Fantasía ",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-	{
-		"productId": 7,
-		"name": "El marciano.",
-		"description": "Andy Weir.",
-		"price": 10000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/7.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Sci-fi, Suspenso",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-	{
-		"productId": 4,
-		"name": "El club de las 5 de la mañana.",
-		"description": "Robin Sharma.",
-		"price": 18000,
-		"categoryId": 3,
-		"active": true,
-    "image": "../assets/Books/4.jpeg",
-		"category": {
-			"categoryId": 3,
-			"category": "Autoayuda, Buenos habitos",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-	{
-		"productId": 15,
-		"name": "Los mitos de Cthulhu",
-		"description": "H.P. Lovecraft.",
-		"price": 19500,
-		"categoryId": 3,
-		"active": true,
-    "image": "../assets/Books/15.jpeg",
-		"category": {
-			"categoryId": 3,
-			"category": "Fantasía, Sci-fi",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-  {
-		"productId": 1,
-		"name": "¡Que viva la musica!",
-		"description": "Andrés Caicedo.",
-		"price": 10000,
-		"categoryId": 1,
-		"active": true,
-    "image": "../assets/Books/1.jpeg",
-		"category": {
-			"categoryId": 1,
-			"category": "Novela, Colombiana",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-	{
-		"productId": 10,
-		"name": "Peter Pan",
-		"description": "J.M. Barrie",
-		"price": 25000,
-		"categoryId": 3,
-		"active": true,
-    "image": "../assets/Books/10.jpeg",
-		"category": {
-			"categoryId": 3,
-			"category": "Fantasía, Novela infantil",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-	{
-		"productId": 11,
-		"name": "Sol de media noche",
-		"description": "Stephenie Meyer",
-		"price": 19000,
-		"categoryId": 2,
-		"active": true,
-    "image": "../assets/Books/11.jpeg",
-		"category": {
-			"categoryId": 2,
-			"category": "Fantasia, Novela vampirica",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
-	{
-		"productId": 3,
-		"name": "Historia universal de la infamia.",
-		"description": "Jorge Luis Borges.",
-		"price": 15000,
-		"categoryId": 3,
-		"active": true,
-    "image": "../assets/Books/3.jpeg",
-		"category": {
-			"categoryId": 3,
-			"category": "Novela, Terror",
-			"active": true
-		},
-    "swap": {
-      "money": 29000,
-      "books": "Cazador Haku, Dune, Cosmos"
-    }
-	},
 	{
 		"productId": 20,
 		"name": "Libro de prueba 2",
@@ -565,5 +302,6 @@ export class AppComponent
     }
 	}
 ];
+*/
 }
 
