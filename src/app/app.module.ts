@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
+    SweetAlert2Module,
+    SweetAlert2Module.forChild({ /* options */ })
+
   ],
   providers: [],
   bootstrap: [AppComponent]

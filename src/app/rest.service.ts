@@ -17,4 +17,14 @@ export class RestService
   {
     return this.http.post(url, body);
   }
+
+  public put(url:string, body:any)
+  {
+    return this.http.put<any>(url, body);
+  }
+
+  public delete(url:string)
+  {
+    return this.http.delete(url);
+  }
 }

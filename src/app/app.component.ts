@@ -2,6 +2,8 @@ import { ANALYZE_FOR_ENTRY_COMPONENTS, Component, Input} from '@angular/core';
 import { Product } from './product.model';
 import { setTheme } from 'ngx-bootstrap/utils';
 import { RestService } from './rest.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-root',
@@ -50,6 +52,7 @@ export class AppComponent
   nuevoNombre : string = "";
 
   products: Product[] = [];
+  urlUpdate : string = "";
 
   title = 'tiendaLibros';
   edad = 18;
@@ -109,16 +112,80 @@ export class AppComponent
 
     if(this.objLibroInsert.name == "" || this.objLibroInsert.description == "")
     {
-      alert("Ingrese la información faltante...");
+      //alert("Ingrese la información faltante...");
+      Swal.fire({
+        title: 'Advertencia!',
+        text: 'Ingrese la información faltante...',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
     }
     else
     {
       this.RestService.post(this.ENDPOINT_BACKEND + "/save", this.objLibroInsert).subscribe(
         response => {
-          alert("Guardando info: " + response + " ...");
+          //alert("Guardando info: " + response + " ...");
+          //alert("Se guardo la información.");
+          Swal.fire({
+            title: 'Guardado!',
+            text: 'Se guardo la información del libro',
+            icon: 'success',
+            confirmButtonText: 'Cerrar'
+          });
+          this.limpiarCamposCrearLibro();
+          this.cargarData();
+        },
+        (error: HttpErrorResponse) => {
+          //alert("Error, no se pudo guardar la información");
+          Swal.fire({
+            title: 'Error!',
+            text: 'No se pudo guardar la información',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         }
       );
     }
+  }
+
+  public actualizarInfoLibro()
+  {
+    console.log(this.objLibro);
+    if(this.objLibro.name == "" || this.objLibro.description == "" || this.objLibro.productId == 0)
+    {
+      //alert("Ingrese la información faltante...");
+      Swal.fire({
+        title: 'Advertencia!',
+        text: 'Ingrese la información faltante...',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+    }
+    else
+    {
+      this.urlUpdate = this.ENDPOINT_BACKEND + "/update/" + this.objLibro.productId;
+
+      console.log("this.urlUpdate: " + this.urlUpdate);
+
+      this.RestService.put(this.urlUpdate, this.objLibro).subscribe(response => {
+        Swal.fire({
+          title: 'Actualizado!',
+          text: 'Se modifico la información del libro',
+          icon: 'success',
+          confirmButtonText: 'Cerrar'
+        });
+      });
+    }
+  }
+
+  public limpiarCamposCrearLibro()
+  {
+    this.objLibroInsert.name = "";
+    this.objLibroInsert.description = "";
+    this.objLibroInsert.price = 0;
+    this.objLibroInsert.categoryId = 1;
+    this.objLibroInsert.active = true;
+    this.objLibroInsert.image = '../assets/images/default.png';
   }
 
   public buscarLibro(event: Event)
@@ -135,28 +202,56 @@ export class AppComponent
   {
     const element = event.target as HTMLInputElement;
     this.objLibroInsert.name = element.value;
-    console.log(element.value);
+    console.log("Insert: " + element.value);
+  }
+
+  public actualizarNameUpdate(event: Event)
+  {
+    const element = event.target as HTMLInputElement;
+    this.objLibro.name = element.value;
+    console.log("Update: " + element.value);
   }
 
   public actualizarDescription(event: Event)
   {
     const element = event.target as HTMLInputElement;
     this.objLibroInsert.description = element.value;
-    console.log(element.value);
+    console.log("Insert: " + element.value);
+  }
+
+  public actualizarDescriptionUpdate(event: Event)
+  {
+    const element = event.target as HTMLInputElement;
+    this.objLibro.description = element.value;
+    console.log("Update: " + element.value);
   }
 
   public actualizarPrice(event: Event)
   {
     const element = event.target as HTMLInputElement;
     this.objLibroInsert.price = Number(element.value);
-    console.log(element.value);
+    console.log("Insert: " + element.value);
+  }
+
+  public actualizarPriceUpdate(event: Event)
+  {
+    const element = event.target as HTMLInputElement;
+    this.objLibroInsert.price = Number(element.value);
+    console.log("Update: " + element.value);
   }
 
   public actualizarCategory(event: Event)
   {
     const element = event.target as HTMLInputElement;
     this.objLibroInsert.categoryId = Number(element.value);
-    console.log(element.value);
+    console.log("Insert: " + element.value);
+  }
+
+  public actualizarCategoryUpdate(event: Event)
+  {
+    const element = event.target as HTMLInputElement;
+    this.objLibro.categoryId = Number(element.value);
+    console.log("Update: " + element.value);
   }
 
   public actualizarSwap(event: Event)
@@ -183,12 +278,6 @@ export class AppComponent
     let image: string = '';
     let categoryName: string = '';
     let Swap: string = '';
-
-    //JSONLibro:any = JSON.stringify(this.products, ['productId']);
-
-    //console.log(this.products[1].price);
-
-    //this.products.forEach(libro => console.log(libro));
 
     this.products.forEach(function(libro)
     {
@@ -227,6 +316,38 @@ export class AppComponent
   public closePopup()
   {
     this.displayStyle = "none";
+  }
+
+  public eliminarLibro(libro:any)
+  {
+    //alert("eliminar: " + libro);
+    this.urlUpdate = this.ENDPOINT_BACKEND + "/delete/" + libro;
+
+    console.log("this.urlUpdate: " + this.urlUpdate);
+
+    Swal.fire({
+      title: 'Esta seguro?',
+      text: "Usted no podra revertir este cambio!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed)
+      {
+        this.RestService.delete(this.urlUpdate).subscribe(response => {
+          console.log("response: " + response);
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          );
+          this.closePopup();
+          this.cargarData();
+        });
+      }
+    })
   }
 
   public intercambiarLibro()
